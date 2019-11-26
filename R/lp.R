@@ -13,38 +13,15 @@ n <- nrow(playersStat)
 m <- ncol(playersStat)
 
 # Informacoes da formacao tatica (k: niveis, l = jogadores por linha)
-k <- 5
-l <- 4
+#matriz
 
-model <- MILPModel() %>%
-  # Variavel indicadora se o i-esimo jogador assume a j-esima posicao
-  add_variable(p[i], i = 1:n, j = 1:m, type = 'binary') %>%
-  
-  # Variavel indicadora da formacao
-  add_variable(f[i, j], i = 1:k, j = 1:l, type = 'binary') %>%
-  
-  # Designar cada Op para as facções minimizando as preferencias
-  set_objective(
-    sum_expr(colwise(get_from_matrix(i, j, weight_matrix)) * x[i, j], i = 1:n, j = 1:m) + 7 * sum_expr(y[j], j = 1:m), sense = 'max'
-  ) %>%
-  
-  # Toda Op precisa ser designada para uma facção
-  add_constraint(sum_expr(x[i, j], j = 1:m) == 1, i = 1:n) %>%
-  
-  # Restricao da especificidade da OP 
-  add_constraint(x[i, j] <= colwise(get_from_matrix(i, j, restriction_matrix)), i = 1:n, j = 1:m) %>%
-  
-  # Número de dias precisa ser maior ou igual até a próxima vez que um caminhão for abastecer novamente a facção
-  add_constraint(y[j] >= faction_rank$diffDay[j] * b1[j], j = 1:m) %>%
-  
-  # Numero maximo de dias de trabalho que a faccao pode receber
-  add_constraint(y[j] <= faction_rank$maxDay[j], j = 1:m) %>%
-  
-  # THE BIG M METHOD: se a faccao recebe OP, entao o numero minimo de carga é conforme a variavel de carga minima 
-  add_constraint(-y[j] + M * b1[j] >= 0, j = 1:m) %>%
-  add_constraint(-y[j] + M * b1[j] <= M - 1, j = 1:m) %>%
-  
-  # A soma de todas as Op's enviadas para a mesma facção não pode ultrapassar a capacidade da facção vezes o número de dias
-  add_constraint(sum_expr(colwise(pendingForProduction_optimization$piecesQuantityInMinutes[i]) * x[i, j], i = 1:n) <= faction_rank$factionProductionCapacities[j] * y[j], j = 1:m)
+model <- MILPModel() #%>%
+  # # Variavel indicadora se o i-esimo jogador assume a j-esima posicao
+  # add_variable(p[i], i = 1:n, j = 1:m, type = 'binary') %>%
+  # 
+  # # Variavel indicadora da formacao
+  # add_variable(f[i, j], i = 1:k, j = 1:l, type = 'binary') %>%
 
-result <- solve_model(model, with_ROI(solver = "symphony", presolve = T, time_limit = 3 * 60))
+
+result <- solve_model(model, with_ROI(solver = "symphony", 
+                                      presolve = T, time_limit = 5 * 60))

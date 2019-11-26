@@ -1,0 +1,25 @@
+CB: Center Back
+CDM: Center Defensive Midfielder
+CF: Center Forward
+CM: Center Midfielder
+GK: Goal Keeper
+LAM: Left Attacking Midfielder
+LB: Left Back
+LCB: Left Center Back
+LCM: Left Center Midfielder
+LDM: Left Defensive Midfielder
+LF: Left Forward
+LM: Left Midfielder
+LS: Left Striker
+LW: Left Wing
+LWB: Left Wing Back
+RB: Right Back
+RCB: Right Center Back
+RCM: Right Center Midfielder
+RDM: Right Defensive Midfielder
+RF: Right Forward
+RM: Right Midfielder
+RS: Right Striker
+RW: Right Wing
+RWB: Right Wing Back
+ST: Striker
