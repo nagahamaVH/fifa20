@@ -1,0 +1,19 @@
+Objetivos:
+    - Principal:
+        - Encontrar o time que maximize o escore médio
+
+    Específicos:
+        - Maximizar dado uma categoria: defesa, ataque, etc
+        - Parametrizar conforme dinheiro disponível
+    
+    Restrições:
+        - Considerar posições dos jogadores
+        - Considerar as diversas formações
+
+
+Citar fatores não contemplados pelo modelo:
+- Química entre os jogadores (fifa)
+
+Referências:
+- Formações táticas e nomes de posições:
+	https://en.wikipedia.org/wiki/Formation_(association_football)

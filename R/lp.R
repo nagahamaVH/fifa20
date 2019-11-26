@@ -5,20 +5,28 @@ must.use.package("ompr.roi", quietly = TRUE)
 must.use.package("ROI.plugin.symphony", quietly = TRUE)
 source('./R/utils.R')
 
-load('./data/fifa.RData')
+load('./data/weightMatrix.RData')
+load('./data/players.RData')
+
+# Informacoes dos jogadores
+n <- nrow(playersStat)
+m <- ncol(playersStat)
+
+# Informacoes da formacao tatica (k: niveis, l = jogadores por linha)
+k <- 5
+l <- 4
 
 model <- MILPModel() %>%
-  # 1 se a op i for alocada na facçao j
-  add_variable(x[i, j], i = 1:n, j = 1:m, type = "binary") %>%
+  # Variavel indicadora se o i-esimo jogador assume a j-esima posicao
+  add_variable(p[i], i = 1:n, j = 1:m, type = 'binary') %>%
   
-  # Determina o número de dias necessários para a facção j produzir as OP's designadas
-  add_variable(y[j], j = 1:m, type = "integer", lb = 1, ub = max_day) %>%
-  
-  # Variavel indicadora se a faccao recebe OP
-  add_variable(b1[j], type = "binary", j = 1:m) %>%
+  # Variavel indicadora da formacao
+  add_variable(f[i, j], i = 1:k, j = 1:l, type = 'binary') %>%
   
   # Designar cada Op para as facções minimizando as preferencias
-  set_objective(sum_expr(colwise(get_from_matrix(i, j, weight_matrix)) * x[i, j], i = 1:n, j = 1:m) + 7 * sum_expr(y[j], j = 1:m), sense = 'min') %>%
+  set_objective(
+    sum_expr(colwise(get_from_matrix(i, j, weight_matrix)) * x[i, j], i = 1:n, j = 1:m) + 7 * sum_expr(y[j], j = 1:m), sense = 'max'
+  ) %>%
   
   # Toda Op precisa ser designada para uma facção
   add_constraint(sum_expr(x[i, j], j = 1:m) == 1, i = 1:n) %>%

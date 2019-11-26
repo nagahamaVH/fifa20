@@ -4,23 +4,28 @@ must.use.package('dplyr')
 must.use.package('stringr')
 source('./R/utils.R')
 
-fifa <- read_delim('./data/data.csv', delim = ',', col_names = T) %>%
-  select(-X1)
+players <- read_delim('./data/players_20.csv', delim = ',', col_names = T) 
 
-fifa <- fifa %>%
+playersInfo <- players %>%
+  select(sofifa_id, short_name, value_eur, wage_eur, player_positions) %>%
+  rename(id = sofifa_id)
+
+playersStat <- players %>%
   select(
-    X1,
-    ID,
-    Name,
-    
-  )
+    overall, ls, st, rs, lw, lf, cf, rf, rw, lam, lm, lcm, cm, rcm, rm, lwb, 
+    ldm, cdm, rdm, rwb, lb, lcb, cb, rcb, rb
+  ) %>%
+  mutate_all(
+    function(x) str_extract(x, '^\\d*') %>%
+      as.numeric()
+  ) %>%
+  rename(gk = overall) %>%
   mutate(
-    Value = StandardizeMoney(Value),
-    Wage = StandardizeMoney(Wage)
-  )
+    gk = ifelse(playersInfo$player_positions == 'GK', gk, NA)
+  ) %>%
+  select(sort(names(.)))
 
-fifa %>%
-  group_by(Position) %>%
-  summarise(freq = n()) %>% View()
+players <- bind_cols(playersInfo, playersStat)
 
-save(file = './data/fifa.RData', fifa)
+save(file = './data/weightMatrix.RData', playersStat)
+save(file = './data/players.RData', players)

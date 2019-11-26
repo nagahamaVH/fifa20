@@ -1,4 +1,4 @@
 library(NCmisc)
 must.use.package('dplyr')
-must.use.package('stringr')
 
+weightMatrix <- players %>%
