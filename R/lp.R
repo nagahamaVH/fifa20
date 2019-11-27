@@ -1,3 +1,5 @@
+rm(list = ls())
+
 library(NCmisc)
 must.use.package('dplyr')
 must.use.package("ompr", quietly = TRUE)
@@ -5,8 +7,8 @@ must.use.package("ompr.roi", quietly = TRUE)
 must.use.package("ROI.plugin.symphony", quietly = TRUE)
 source('./R/utils.R')
 
-load('./data/weightMatrix.RData')
-load('./data/players.RData')
+load('./data/playersInfo.RData')
+load('./data/playersStat.RData')
 
 # Informacoes dos jogadores
 n <- nrow(playersStat)

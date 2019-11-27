@@ -12,8 +12,8 @@ Objetivos:
 
 
 Citar fatores não contemplados pelo modelo:
-- Química entre os jogadores (fifa)
+	- Química entre os jogadores (fifa)
 
-Referências:
-- Formações táticas e nomes de posições:
-	https://en.wikipedia.org/wiki/Formation_(association_football)
+Formações consideradas:
+	- 5 formações mais comuns
+	https://www.fifauteam.com/best-fifa-20-formation/
