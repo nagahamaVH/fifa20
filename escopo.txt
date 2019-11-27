@@ -15,5 +15,5 @@ Citar fatores não contemplados pelo modelo:
 	- Química entre os jogadores (fifa)
 
 Formações consideradas:
-	- 5 formações mais comuns
+	- 5 formações mais utilizadas
 	https://www.fifauteam.com/best-fifa-20-formation/

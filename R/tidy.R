@@ -22,9 +22,8 @@ playersStat <- players %>%
       as.numeric()
   ) %>%
   rename(gk = overall) %>%
-  mutate(
-    gk = ifelse(playersInfo$player_positions == 'GK', gk, NA)
-  )
+  mutate(gk = ifelse(playersInfo$player_positions == 'GK', gk, 0)) %>%
+  mutate_all(function(x) ifelse(is.na(x), 0, x))
 
 save(file = './data/playersStat.RData', playersStat)
 save(file = './data/playersInfo.RData', playersInfo)

@@ -1,12 +1,16 @@
 rm(list = ls())
 
 library(NCmisc)
+must.use.package('readr')
 must.use.package('dplyr')
 must.use.package("ompr", quietly = TRUE)
 must.use.package("ompr.roi", quietly = TRUE)
 must.use.package("ROI.plugin.symphony", quietly = TRUE)
 source('./R/utils.R')
 
+formations <- read_csv2('./data/formations.csv') %>%
+  select(-c('id', 'formation')) %>%
+  as.matrix()
 load('./data/playersInfo.RData')
 load('./data/playersStat.RData')
 
@@ -14,16 +18,26 @@ load('./data/playersStat.RData')
 n <- nrow(playersStat)
 m <- ncol(playersStat)
 
-# Informacoes da formacao tatica (k: niveis, l = jogadores por linha)
-#matriz
+# Informacoes da formacao 
+p <- nrow(formations)
 
-model <- MILPModel() #%>%
-  # # Variavel indicadora se o i-esimo jogador assume a j-esima posicao
-  # add_variable(p[i], i = 1:n, j = 1:m, type = 'binary') %>%
-  # 
-  # # Variavel indicadora da formacao
-  # add_variable(f[i, j], i = 1:k, j = 1:l, type = 'binary') %>%
-
+model <- MILPModel() %>%
+  
+  # Variavel indicadora se o i-esimo jogador assume a j-esima posicao
+  add_variable(dummyPosition[i, j], i = 1:n, j = 1:m, type = 'binary') %>%
+  
+  # Variavel indicadora da escolha da formação
+  add_variable(C[k], type = "binary", k = 1:p) %>%
+  
+  # Função objetiva: maximizar a soma do escore do time
+  set_objective(sum_expr(colwise(
+    getFromMatrix(playersStat, i, j) * dummyPosition[i, j], i = 1:n, 
+    j = 1:m))) %>%
+  
+  # R: A quantidade total de jogadores na posição deve ser igual a quantidade 
+  # especificada na formação escolhida 
+  add_constraint(sum_expr(dummyPosition[i, j], i = 1:n) - 
+                   getFromMatrix(formations, i, j) < 1, i = 1:p, j = 1:m)
 
 result <- solve_model(model, with_ROI(solver = "symphony", 
                                       presolve = T, time_limit = 5 * 60))
