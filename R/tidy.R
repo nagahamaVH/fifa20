@@ -23,7 +23,8 @@ playersStat <- players %>%
   ) %>%
   rename(gk = overall) %>%
   mutate(gk = ifelse(playersInfo$player_positions == 'GK', gk, 0)) %>%
-  mutate_all(function(x) ifelse(is.na(x), 0, x))
+  mutate_all(function(x) ifelse(is.na(x), 0, x)) %>%
+  as.matrix()
 
 save(file = './data/playersStat.RData', playersStat)
 save(file = './data/playersInfo.RData', playersInfo)
