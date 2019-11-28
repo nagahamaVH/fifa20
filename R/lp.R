@@ -47,7 +47,8 @@ model <- MILPModel() %>%
   # R: A quantidade total de jogadores na posição deve ser igual a quantidade
   # especificada na formação escolhida
   add_constraint(
-    sum_expr(dummyPosition[i, j], i = 1:n) - getFromMatrix(formationsMatrix, k, j) + 
+    sum_expr(dummyPosition[i, j], i = 1:n) - 
+      getFromMatrix(formationsMatrix, k, j) + 
       (1 - b[k]) * M >= 0, j = 1:m, k = 1:p) %>%
   
   # R: A formação tática deve ser única
@@ -57,7 +58,7 @@ model <- MILPModel() %>%
   add_constraint(sum_expr(dummyPosition[i, j], i = 1:n, j = 1:m) == 11)
 
 solution <- solve_model(model, with_ROI(solver = "symphony", presolve = T, 
-                                        time_limit = 0.5 * 60, verbosity = 1))
+                                        verbosity = 1))
 
 # Indice dos jogadores escolhidos
 solutionPlayers <- solution %>%
