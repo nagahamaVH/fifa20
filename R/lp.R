@@ -1,11 +1,10 @@
 rm(list = ls())
 
-library(NCmisc)
-must.use.package('readr')
-must.use.package('dplyr')
-must.use.package("ompr", quietly = TRUE)
-must.use.package("ompr.roi", quietly = TRUE)
-must.use.package("ROI.plugin.symphony", quietly = TRUE)
+library(readr)
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.symphony)
 source('./R/utils.R')
 
 formations <- read_delim('./data/formations.csv', delim = ';')
@@ -60,32 +59,4 @@ model <- MILPModel() %>%
 solution <- solve_model(model, with_ROI(solver = "symphony", presolve = T, 
                                         verbosity = 1))
 
-# Indice dos jogadores escolhidos
-solutionPlayers <- solution %>%
-  get_solution(dummyPosition[i, j]) %>%
-  filter(value == 1) %>%
-  arrange(i, j)
-
-# Indice da formação escolhida
-solutionFormation <- solution %>%
-  get_solution(b[k]) %>%
-  filter(value == 1)
-
-dreamTeam <- lapply(seq_along(solutionPlayers$i), function(index){
-  score <- playersStat[solutionPlayers$i[index], solutionPlayers$j[index]]
-  
-  position <- names(score)
-  
-  playerName <- playersInfo$short_name[index]
-  
-  tibble(playerName, position, score)
-}) %>%
-  bind_rows()
-
-dreamTeam %>%
-  group_by(position) %>%
-  count() %>%
-  arrange(position)
-
-formations %>%
-  filter(id == solutionFormation$k)
+save(file = './data/solution.RData', solution)

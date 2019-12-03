@@ -1,9 +1,8 @@
 rm(list = ls())
 
-library(NCmisc)
-must.use.package('readr')
-must.use.package('dplyr')
-must.use.package('stringr')
+library(readr)
+library(dplyr)
+library(stringr)
 source('./R/utils.R')
 
 players <- read_delim('./data/players_20.csv', delim = ',', col_names = T) 

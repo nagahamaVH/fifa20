@@ -1,4 +1,7 @@
-classify_optimization_v4.R
-.Rproj.user
 .Rhistory
 *.Rproj
+.Rproj.user
+
+classify_optimization_v4.R
+
+renv/library
