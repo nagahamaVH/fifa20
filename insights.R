@@ -1,34 +1,39 @@
 library(dplyr)
+library(stringr)
+library(readr)
+library(ompr)
 source('./R/utils.R')
 
-load('./solution.RData')
+load('./data/playersInfo.RData')
+load('./data/playersStat.RData')
+load('./data/solution.RData')
 
-# Indice dos jogadores escolhidos
+formations <- read_delim('./data/formations.csv', delim = ';')
+
+# Jogadores
 solutionPlayers <- solution %>%
   get_solution(dummyPosition[i, j]) %>%
   filter(value == 1) %>%
   arrange(i, j)
 
-# Indice da formação escolhida
+dreamTeam <- solutionPlayers %>%
+  left_join(playersInfo, by = c('i' = 'id')) %>%
+  mutate(
+    score = getFromMatrix(playersStat, i, j),
+    position = colnames(playersStat[,j]) %>%
+      str_to_upper(),
+    mainPosition = ifelse(position %in% player_positions, T, F)
+  ) %>%
+  select(short_name, value_eur, wage_eur, score, position, player_positions,
+         mainPosition)
+
+dreamTeam %>%
+  summarise(total = sum(value_eur))
+
+# Formação
 solutionFormation <- solution %>%
   get_solution(b[k]) %>%
   filter(value == 1)
-
-dreamTeam <- lapply(seq_along(solutionPlayers$i), function(index){
-  score <- playersStat[solutionPlayers$i[index], solutionPlayers$j[index]]
-  
-  position <- names(score)
-  
-  playerName <- playersInfo$short_name[index]
-  
-  tibble(playerName, position, score)
-}) %>%
-  bind_rows()
-
-dreamTeam %>%
-  group_by(position) %>%
-  count() %>%
-  arrange(position)
 
 formations %>%
   filter(id == solutionFormation$k)

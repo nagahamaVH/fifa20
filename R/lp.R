@@ -13,10 +13,7 @@ formationsMatrix <- formations %>%
   select(-c('id', 'formation')) %>%
   as.matrix()
 
-load('./data/playersInfo.RData')
 load('./data/playersStat.RData')
-
-# playersStat  <- playersStat[1:50,]
 
 # Informacoes dos jogadores
 n <- nrow(playersStat)
