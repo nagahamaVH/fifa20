@@ -2,13 +2,17 @@ library(dplyr)
 library(stringr)
 library(readr)
 library(ompr)
-source('./R/utils.R')
+source('./R/lp-functions.R')
 
-load('./data/playersInfo.RData')
-load('./data/playersStat.RData')
-load('./data/solution.RData')
+playersInfo <- read_csv2('./data/players-info.csv') %>%
+  as.matrix()
+
+playersStat <- read_csv2('./data/players-stat.csv') %>%
+  as.matrix()
 
 formations <- read_delim('./data/formations.csv', delim = ';')
+
+load('./data/solution.RData')
 
 # Jogadores
 solutionPlayers <- solution %>%

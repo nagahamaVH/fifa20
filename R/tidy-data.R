@@ -3,7 +3,7 @@ rm(list = ls())
 library(readr)
 library(dplyr)
 library(stringr)
-source('./R/utils.R')
+source('./R/lp-functions.R')
 
 players <- read_delim('./data/players_20.csv', delim = ',', col_names = T) 
 
@@ -22,8 +22,14 @@ playersStat <- players %>%
   ) %>%
   rename(gk = overall) %>%
   mutate(gk = ifelse(playersInfo$player_positions == 'GK', gk, 0)) %>%
-  mutate_all(function(x) ifelse(is.na(x), 0, x)) %>%
-  as.matrix()
+  mutate_all(function(x) ifelse(is.na(x), 0, x))
 
-save(file = './data/playersStat.RData', playersStat)
-save(file = './data/playersInfo.RData', playersInfo)
+formations <- read_delim('./data/formations.csv', delim = ';')
+
+formationsMatrix <- formations %>%
+  select(-c('id', 'formation'))
+
+write_csv2(playersStat, path = './data/players-stat.csv', col_names = T)
+write_csv2(playersInfo, path = './data/players-info.csv', col_names = T)
+write_csv2(formationsMatrix, path = './data/formations-matrix.csv', 
+           col_names = T)

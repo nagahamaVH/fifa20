@@ -3,12 +3,14 @@ Objetivos:
         - Encontrar o time que maximize o escore médio
 
     Específicos:
-        - Maximizar dado uma categoria: defesa, ataque, etc
         - Parametrizar conforme dinheiro disponível
+        - Maximizar conforme custo benefício*
     
     Restrições:
         - Considerar posições dos jogadores
         - Considerar as diversas formações
+
+*Explorar relação de valor do jogador a partir da habilidade
 
 
 Citar fatores não contemplados pelo modelo:

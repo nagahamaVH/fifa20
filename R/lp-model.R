@@ -5,15 +5,13 @@ library(dplyr)
 library(ompr)
 library(ompr.roi)
 library(ROI.plugin.symphony)
-source('./R/utils.R')
+source('./R/lp-functions.R')
 
-formations <- read_delim('./data/formations.csv', delim = ';')
-
-formationsMatrix <- formations %>%
-  select(-c('id', 'formation')) %>%
+formationsMatrix <- read_csv2('./data/formations-matrix.csv') %>%
   as.matrix()
 
-load('./data/playersStat.RData')
+playersStat <- read_csv2('./data/players-stat.csv') %>%
+  as.matrix()
 
 # Informacoes dos jogadores
 n <- nrow(playersStat)
