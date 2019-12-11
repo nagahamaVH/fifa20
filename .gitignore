@@ -5,3 +5,5 @@
 classify_optimization_v4.R
 
 renv/library
+
+solution.rds

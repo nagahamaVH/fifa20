@@ -54,4 +54,4 @@ model <- MILPModel() %>%
 solution <- solve_model(model, with_ROI(solver = "symphony", presolve = T, 
                                         verbosity = 1))
 
-save(file = './data/solution.RData', solution)
+saveRDS(solution, './R/solution.rds')
