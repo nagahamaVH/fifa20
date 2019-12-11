@@ -1,0 +1,21 @@
+Objetivos:
+    - Principal:
+        - Encontrar o time que maximize o escore médio
+
+    Específicos:
+        - Parametrizar conforme dinheiro disponível
+        - Maximizar conforme custo benefício*
+    
+    Restrições:
+        - Considerar posições dos jogadores
+        - Considerar as diversas formações
+
+*Explorar relação de valor do jogador a partir da habilidade
+
+
+Citar fatores não contemplados pelo modelo:
+	- Química entre os jogadores (fifa)
+
+Formações consideradas:
+	- 5 formações mais utilizadas
+	https://www.fifauteam.com/best-fifa-20-formation/
