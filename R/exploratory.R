@@ -1,3 +1,4 @@
+library(readr)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -6,6 +7,8 @@ library(scales)
 library(wesanderson)
 
 line_color <- wes_palette("Darjeeling2", n = 2, type = 'discrete')[2]
+
+teams <- read_csv2('./data/teams.csv', locale = locale(encoding = 'latin1'))
 
 min_score <- 0
 max_score <- 100
