@@ -163,6 +163,13 @@
       "Repository": "CRAN",
       "Hash": "2c75a0f5a1803f1ea41464c13933b766"
     },
+    "fmsb": {
+      "Package": "fmsb",
+      "Version": "0.7.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e25de45497ca970e450deddacbb9c052"
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.2.1",
@@ -387,6 +394,13 @@
       "Repository": "CRAN",
       "Hash": "0561cf2a62e7265533414b7c847a34de"
     },
+    "tidyr": {
+      "Package": "tidyr",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e0e59d441470d0b6474a9db34a30cb62"
+    },
     "tidyselect": {
       "Package": "tidyselect",
       "Version": "0.2.5",
@@ -414,6 +428,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "810edc02cd91d05024cdab3e53fb2dca"
+    },
+    "wesanderson": {
+      "Package": "wesanderson",
+      "Version": "0.3.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1188f654824e7d25ee6beec223597417"
     },
     "withr": {
       "Package": "withr",

@@ -11,6 +11,8 @@ playersStat <- read_csv2('./data/players-stat.csv') %>%
 
 formations <- read_delim('./data/formations.csv', delim = ';')
 
+formationsInfo <- read_delim('./data/formations-info.csv', delim = ';')
+
 solution <- readRDS('./R/solution.rds')
 
 # Jogadores
@@ -27,8 +29,10 @@ dreamTeam <- solutionPlayers %>%
       str_to_upper(),
     mainPosition = ifelse(position %in% player_positions, T, F)
   ) %>%
+  left_join(formationsInfo, by = 'position') %>%
+  arrange(order) %>%
   select(short_name, value_eur, wage_eur, score, position, player_positions,
-         mainPosition)
+         mainPosition, category)
 
 dreamTeam %>%
   summarise(total = sum(value_eur))
