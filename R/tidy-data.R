@@ -8,7 +8,7 @@ source('./R/lp-functions.R')
 players <- read_delim('./data/players_20.csv', delim = ',', col_names = T) 
 
 playersInfo <- players %>%
-  select(short_name, value_eur, wage_eur, player_positions) %>%
+  select(short_name, value_eur, wage_eur, player_positions, club) %>%
   mutate(id = 1:n())
 
 playersStat <- players %>%

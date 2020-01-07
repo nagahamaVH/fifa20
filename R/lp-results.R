@@ -27,12 +27,12 @@ dreamTeam <- solutionPlayers %>%
     score = getFromMatrix(playersStat, i, j),
     position = colnames(playersStat[,j]) %>%
       str_to_upper(),
-    mainPosition = ifelse(position %in% player_positions, T, F)
+    mainPosition = ifelse(str_detect(player_positions, position), T, F)
   ) %>%
   left_join(formationsInfo, by = 'position') %>%
   arrange(order) %>%
   select(short_name, value_eur, wage_eur, score, position, player_positions,
-         mainPosition, category)
+         mainPosition, category, club)
 
 dreamTeam %>%
   summarise(total = sum(value_eur))
