@@ -20,7 +20,7 @@ m <- ncol(playersStat)
 # Informacoes da formacao 
 p <- nrow(formationsMatrix)
 
-M <- max(p)
+M <- max(formationsMatrix)
 
 model <- MILPModel() %>%
   
