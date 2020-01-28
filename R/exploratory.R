@@ -11,6 +11,10 @@ teams <- read_csv2('./data/teams.csv')
 
 fill_color <- 'green2'
 
+teams %>%
+  slice(1) %>%
+  select(attack, defense, midfield)
+
 score_category <- dreamTeam %>%
   group_by(category) %>%
   summarise(
