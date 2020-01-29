@@ -4,9 +4,7 @@ library(tidyr)
 library(tibble)
 library(ggplot2)
 library(gridExtra)
-#library(fmsb)
 library(scales)
-#library(wesanderson)
 
 teams <- read_csv2('./data/teams.csv')
 
@@ -55,9 +53,7 @@ all_categories <- score_donut %>%
 
 plot_list <- list()
 
-#i <- 1
 for (i in seq_along(all_categories)) {
-  
   score_i <- score_donut %>%
     filter(category == all_categories[i])
   
@@ -67,12 +63,13 @@ for (i in seq_along(all_categories)) {
     geom_rect(col = 'grey50') +
     coord_polar(theta = 'y') +
     geom_label(x = 0, aes(y = ymax[1], label = label[1], 
-                          size = 6), parse = T) +
+                          size = 1), parse = T) +
     xlim(c(0, 4)) +
     theme_void() +
     theme(legend.position = "none") +
     scale_fill_manual(values = c(alpha('grey', alpha = 0.4), fill_color))
-  
 }
 
-do.call('grid.arrange', c(plot_list, ncol = length(all_categories)))
+grid_plot <- do.call('grid.arrange', c(plot_list, ncol = length(all_categories)))
+ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 30, 
+       height = 10)

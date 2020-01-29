@@ -30,13 +30,6 @@
       "Repository": "CRAN",
       "Hash": "ae711e32db797eb48d461115cadb4ef4"
     },
-    "NCmisc": {
-      "Package": "NCmisc",
-      "Version": "1.1.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "71419209bb7fac5f5b9a53917cf83037"
-    },
     "R6": {
       "Package": "R6",
       "Version": "2.4.1",
@@ -163,13 +156,6 @@
       "Repository": "CRAN",
       "Hash": "2c75a0f5a1803f1ea41464c13933b766"
     },
-    "fmsb": {
-      "Package": "fmsb",
-      "Version": "0.7.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e25de45497ca970e450deddacbb9c052"
-    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.2.1",
@@ -183,6 +169,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "83eab558c4b636c7e062817783a22522"
+    },
+    "gridExtra": {
+      "Package": "gridExtra",
+      "Version": "2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d19c2a14bd722683a3355ca2a2335fad"
     },
     "gtable": {
       "Package": "gtable",
@@ -303,13 +296,6 @@
       "Repository": "CRAN",
       "Hash": "1d823808f5db9684354dae09b13213a7"
     },
-    "proftools": {
-      "Package": "proftools",
-      "Version": "0.99-2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "1052591e4c84c2689438defdb5993696"
-    },
     "progress": {
       "Package": "progress",
       "Version": "1.2.2",
@@ -428,13 +414,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "810edc02cd91d05024cdab3e53fb2dca"
-    },
-    "wesanderson": {
-      "Package": "wesanderson",
-      "Version": "0.3.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "1188f654824e7d25ee6beec223597417"
     },
     "withr": {
       "Package": "withr",
