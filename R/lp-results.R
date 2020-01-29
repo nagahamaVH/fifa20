@@ -34,13 +34,7 @@ dreamTeam <- solutionPlayers %>%
   select(short_name, value_eur, wage_eur, score, position, player_positions,
          mainPosition, category, club)
 
-dreamTeam %>%
-  summarise(total = sum(value_eur))
-
 # Formação
 solutionFormation <- solution %>%
   get_solution(b[k]) %>%
   filter(value == 1)
-
-formations %>%
-  filter(id == solutionFormation$k)
