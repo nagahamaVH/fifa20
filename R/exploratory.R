@@ -71,5 +71,5 @@ for (i in seq_along(all_categories)) {
 }
 
 grid_plot <- do.call('grid.arrange', c(plot_list, ncol = length(all_categories)))
-ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 30, 
-       height = 10)
+ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 28, 
+       height = 9)
