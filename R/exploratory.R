@@ -44,7 +44,8 @@ score_donut <- bind_rows(score_category, score_complementary) %>%
     fraction = score / sum(score),
     ymax = cumsum(fraction),
     ymin = c(0, head(ymax, n = -1)),
-    label = paste0('atop(bold("', category, ': ', score, '"), "', gain, '% > ', second_best_team, '")')
+    label = paste0('atop(bold("', category, ': ', score, '"), "', 
+                   gain, '% > ', second_best_team, '")')
   )
 
 all_categories <- score_donut %>%
@@ -62,8 +63,7 @@ for (i in seq_along(all_categories)) {
                         fill = type)) +
     geom_rect(col = 'grey50') +
     coord_polar(theta = 'y') +
-    geom_label(x = 0, aes(y = ymax[1], label = label[1], 
-                          size = 1), parse = T) +
+    geom_label(x = 0, aes(y = ymax[1], label = label[1]), size = 3, parse = T) +
     xlim(c(0, 4)) +
     theme_void() +
     theme(legend.position = "none") +
@@ -71,5 +71,6 @@ for (i in seq_along(all_categories)) {
 }
 
 grid_plot <- do.call('grid.arrange', c(plot_list, ncol = length(all_categories)))
-ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 28, 
+
+ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 24, 
        height = 9)
