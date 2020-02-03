@@ -6,6 +6,8 @@ library(ggplot2)
 library(gridExtra)
 library(scales)
 
+source('lp-results.R', enconding = 'UTF-8')
+
 teams <- read_csv2('./data/teams.csv')
 
 fill_color <- 'green2'
@@ -16,18 +18,26 @@ second_best_team <- teams %>%
 
 score_second_best <- teams %>%
   slice(1) %>%
-  select(attack, defense, midfield) %>%
+  select(attack, defense, midfield, overall) %>%
   gather(category, second_best) %>%
-  select(second_best) %>%
   mutate(second_best_team)
 
-score_category <- dreamTeam %>%
+score_overall <- dream_team %>%
+  summarise(
+    category = 'overall',
+    score = mean(score) %>%
+      round(),
+    type = 'value'
+  )
+
+score_category <- dream_team %>%
   group_by(category) %>%
   summarise(
     score = mean(score) %>%
       round(),
     type = 'value'
   ) %>%
+  bind_rows(score_overall) %>%
   bind_cols(score_second_best)
 
 score_complementary <- score_category %>%
@@ -63,14 +73,14 @@ for (i in seq_along(all_categories)) {
                         fill = type)) +
     geom_rect(col = 'grey50') +
     coord_polar(theta = 'y') +
-    geom_label(x = 0, aes(y = ymax[1], label = label[1]), size = 3, parse = T) +
+    geom_label(x = 0, aes(y = ymax[1], label = label[1]), size = 4, parse = T) +
     xlim(c(0, 4)) +
     theme_void() +
     theme(legend.position = "none") +
     scale_fill_manual(values = c(alpha('grey', alpha = 0.4), fill_color))
 }
 
-grid_plot <- do.call('grid.arrange', c(plot_list, ncol = length(all_categories)))
+grid_plot <- do.call('grid.arrange', c(plot_list, ncol = 2))
 
-ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 24, 
-       height = 9)
+ggsave('./images/score-categories.png', plot = grid_plot, units = 'cm', width = 18, 
+       height = 14)
