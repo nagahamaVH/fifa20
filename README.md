@@ -8,8 +8,6 @@ The goal of the analysis is to find the Dream Team using Linear Programming meth
 
 <img src="images/score-categories.png" alt="scores" width="400"/>
 
-***
-
 ## Setup
 
 1. Clone this repository
