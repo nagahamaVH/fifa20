@@ -4,9 +4,9 @@ This repository contains the codes of the post [Determinando o Dream Team do FIF
 
 The goal of the analysis is to find the Dream Team using Linear Programming methodology.
 
-<img src="images/dream-team-formation.png" alt="formation" width="230"/>
+<img src="images/dream-team-formation.png" alt="formation" width="300"/>
 
-<img src="images/score-categories.png" alt="scores" width="370"/>
+<img src="images/score-categories.png" alt="scores" width="400"/>
 
 ***
 
